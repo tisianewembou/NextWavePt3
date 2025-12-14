@@ -1,6 +1,6 @@
 import os
 import datetime
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
@@ -13,7 +13,7 @@ if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='dist', static_url_path='')
 CORS(app)
 
 # --- Utility Functions ---
@@ -26,8 +26,8 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET'])
 def home():
-    """Serves the frontend HTML."""
-    return render_template('index.html')
+    """Serves the React app."""
+    return send_from_directory('dist', 'index.html')
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video():
