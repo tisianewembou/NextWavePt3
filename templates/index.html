@@ -145,7 +145,6 @@
                 mediaRecorder.onstop = () => {
                     recordedBlob = new Blob(recordedChunks, { type: mimeType });
                     downloadButton.style.display = 'inline-block';
-                    uploadButton.style.display = 'inline-block';
                     updateStatus(`Recording complete! Size: ${(recordedBlob.size / 1024 / 1024).toFixed(2)} MB`);
                 };
 
